@@ -31,6 +31,7 @@ export default function HeaderControls(props) {
     minDate,
     headingLevel,
     monthYearHeaderWrapperStyle,
+    yearFormatter
   } = props;
   const MONTHS = months || Utils.MONTHS; // English Month Array
   const monthName = MONTHS[currentMonth];
