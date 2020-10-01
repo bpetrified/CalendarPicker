@@ -62,7 +62,7 @@ export default function HeaderControls(props) {
         </TouchableOpacity>
         <TouchableOpacity onPress={onPressYear}>
           <Text style={[styles.yearHeaderMainText, textStyle]}>
-            { year }
+            { yearFormatter ? yearFormatter(year) : year }
           </Text>
         </TouchableOpacity>
       </View>
