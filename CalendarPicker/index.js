@@ -467,7 +467,8 @@ export default class CalendarPicker extends Component {
       scrollable,
       horizontal,
       yearFormatter,
-      monthYearHeaderTextStyle
+      monthYearHeaderTextStyle,
+      todayTextWrapperStyle
     } = this.props;
 
     let content;

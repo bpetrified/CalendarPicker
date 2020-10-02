@@ -31,7 +31,8 @@ export default function Day(props) {
     disabledDatesTextStyle,
     minRangeDuration,
     maxRangeDuration,
-    enableDateChange
+    enableDateChange,
+    todayTextWrapperStyle
   } = props;
 
   const thisDay = moment({year, month, day, hour: 12 });
@@ -181,7 +182,7 @@ export default function Day(props) {
     }
 
     return (
-      <View style={[styles.dayWrapper, customContainerStyle]}>
+      <View style={[styles.dayWrapper, isToday && todayTextWrapperStyle, customContainerStyle]}>
         <TouchableOpacity
           disabled={!enableDateChange}
           style={[customDateStyle, daySelectedStyle, propSelectedDayStyle ]}
@@ -195,7 +196,7 @@ export default function Day(props) {
   }
   else {  // dateOutOfRange = true
     return (
-      <View style={styles.dayWrapper}>
+      <View style={[styles.dayWrapper, isToday && todayTextWrapperStyle]}>
         <Text style={[textStyle, styles.disabledText, disabledDatesTextStyle]}>
           { day }
         </Text>
