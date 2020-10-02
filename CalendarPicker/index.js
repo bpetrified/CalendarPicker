@@ -484,6 +484,7 @@ export default class CalendarPicker extends Component {
           maxDate={maxDate}
           onSelectMonth={this.handleOnSelectMonthYear}
           headingLevel={headingLevel}
+          yearFormatter={yearFormatter}
         />
       );
       break;
