@@ -31,8 +31,7 @@ export default function Day(props) {
     disabledDatesTextStyle,
     minRangeDuration,
     maxRangeDuration,
-    enableDateChange,
-    todayTextWrapperStyle
+    enableDateChange
   } = props;
 
   const thisDay = moment({year, month, day, hour: 12 });
@@ -141,7 +140,8 @@ export default function Day(props) {
         selectedStartDate &&
         isThisDaySameAsSelectedStart) {
       daySelectedStyle = styles.selectedDay;
-      selectedDayColorStyle = [styles.selectedDayLabel, isToday && todayTextStyle];
+      // Chin - modified, selectedDay style should override today style...
+      selectedDayColorStyle = [isToday && todayTextStyle, styles.selectedDayLabel];
       // selectedDayStyle prop overrides selectedDayColor (created via makeStyles)
       propSelectedDayStyle = selectedDayStyle || styles.selectedDayBackground;
     }
@@ -182,10 +182,11 @@ export default function Day(props) {
     }
 
     return (
-      <View style={[styles.dayWrapper, isToday && todayTextWrapperStyle, customContainerStyle]}>
+      <View style={[styles.dayWrapper, customContainerStyle]}>
         <TouchableOpacity
           disabled={!enableDateChange}
-          style={[customDateStyle, daySelectedStyle, propSelectedDayStyle ]}
+          // Chin - modified
+          style={[customDateStyle, isToday && { borderColor: '#dadada', borderWidth: 1 }, daySelectedStyle, propSelectedDayStyle]}
           onPress={() => onPressDay({year, month, day}) }>
           <Text style={[styles.dayLabel, textStyle, customTextStyle, selectedDayColorStyle]}>
             { day }
@@ -196,10 +197,13 @@ export default function Day(props) {
   }
   else {  // dateOutOfRange = true
     return (
-      <View style={[styles.dayWrapper, isToday && todayTextWrapperStyle]}>
+      <View style={[styles.dayWrapper]}>
+        {/* Chin - modified to highlight today when it is out of range */}
+        <View style={isToday && { ...styles.selectedToday, backgroundColor: 'transparent', borderColor: '#dadada', borderWidth: 1 }}>
         <Text style={[textStyle, styles.disabledText, disabledDatesTextStyle]}>
           { day }
         </Text>
+        </View>
       </View>
     );
   }
