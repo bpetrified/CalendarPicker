@@ -196,6 +196,7 @@ export default function Day(props) {
     );
   }
   else {  // dateOutOfRange = true
+    let isToday = thisDay.isSame(today, 'day');
     return (
       <View style={[styles.dayWrapper]}>
         {/* Chin - modified to highlight today when it is out of range */}
